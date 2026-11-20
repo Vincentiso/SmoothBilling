@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — SmoothBilling</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="navbar no-print">
+        <a href="/dashboard" class="logo">SmoothBilling</a>
+        <nav>
+            <span>Signed in as <strong>{{ user_email }}</strong></span>
+            <a href="/logout" class="btn-outline">Log Out</a>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <section class="card">
+            <h2>New Invoice</h2>
+            <form id="invoice-form" method="POST" action="/invoices">
+                <div class="form-row">
+                    <div>
+                        <label for="client_name">Client Name</label>
+                        <input type="text" id="client_name" name="client_name" placeholder="Acme Corp" required>
+                    </div>
+                    <div>
+                        <label for="tax_rate">Tax Rate (%)</label>
+                        <input type="number" id="tax_rate" name="tax_rate" value="14.975" step="0.001" min="0" max="100" required>
+                    </div>
+                </div>
+
+                <h3>Line Items</h3>
+                <div id="line-items">
+                    <div class="line-item">
+                        <input type="text" name="description[]" placeholder="Service description" aria-label="Description" required>
+                        <input type="number" name="quantity[]" class="qty" value="1" min="1" step="1" aria-label="Quantity" required>
+                        <input type="number" name="price[]" class="price" value="0.00" min="0" step="0.01" aria-label="Unit Price" required>
+                        <button type="button" class="btn-remove no-print" aria-label="Remove item">&times;</button>
+                    </div>
+                </div>
+
+                <button type="button" id="add-item-btn" class="btn-outline no-print">+ Add Line Item</button>
+
+                <div class="totals">
+                    <p>Subtotal: <strong>$<span id="subtotal">0.00</span></strong></p>
+                    <p>Tax: <strong>$<span id="tax-amount">0.00</span></strong></p>
+                    <p class="grand-total">Total: <strong>$<span id="grand-total">0.00</span></strong></p>
+                </div>
+
+                <div class="form-actions no-print">
+                    <button type="submit" class="btn-primary">Save Invoice</button>
+                    <button type="button" onclick="window.print()" class="btn-outline">Print Invoice</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="card no-print">
+            <h2>Your Invoices</h2>
+            {% if invoices %}
+                <ul class="invoice-list">
+                    {% for inv in invoices %}
+                        <li>
+                            <span><strong>{{ inv.client_name }}</strong> — ${{ "%.2f"|format(inv.total) }}</span>
+                            <span class="badge">{{ inv.status }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No invoices yet. Create your first one above.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
