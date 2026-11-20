@@ -1,1 +1,6 @@
-[]
+[
+  {
+    "email": "testemail@gmail.com",
+    "password_hash": "scrypt:32768:8:1$uGYoC1cRNn79aAMf$b66f909c58aef0abbc2e8ad48cee0debf966dad50d183dae051840869704a43cf7d3dc0699d2dd5f5c31b469d688c8010354e0d3bac72e378149ff2eb26032fe"
+  }
+]

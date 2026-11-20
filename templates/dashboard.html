@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard — SmoothBilling</title>
+    <title>Dashboard â€” SmoothBilling</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -61,7 +61,7 @@
                 <ul class="invoice-list">
                     {% for inv in invoices %}
                         <li>
-                            <span><strong>{{ inv.client_name }}</strong> — ${{ "%.2f"|format(inv.total) }}</span>
+                            <span><strong>{{ inv.client_name }}</strong> â€” ${{ "%.2f"|format(inv.total) }}</span>
                             <span class="badge">{{ inv.status }}</span>
                         </li>
                     {% endfor %}

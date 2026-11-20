@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "id": "c47069f3",
+    "user_email": "testemail@gmail.com",
+    "client_name": "Tester1",
+    "items": [
+      {
+        "description": "Food",
+        "quantity": 1.0,
+        "price": 50.0
+      }
+    ],
+    "subtotal": 50.0,
+    "tax_rate": 14.975,
+    "tax_amount": 7.49,
+    "total": 57.49,
+    "status": "Unpaid"
+  }
+]
